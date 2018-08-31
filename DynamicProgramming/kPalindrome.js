@@ -2,19 +2,19 @@
 var kPal = function(s, k) {
 	let left = 0;
 	let right = s.length - 1;
-	let first = true;
+	let firstEncounter = true;
 	while (left < right) {
 		if (s.charAt(left) != s.charAt(right)) {
 			if (k <= 0) {
 				return false;
 			}
 			k--;
-			if (first) {
+			if (firstEncounter) {
 				left++;
-				first = false;
+				firstEncounter = false;
 			} else {
 				right--;
-				first = true;
+				firstEncounter = true;
 			}
 		} else {
 			left++;
