@@ -31,7 +31,7 @@ function add_one(arr) {
 			carry = 0;
 		}
 		result[i] = total % 10;
-		if (i === 0 && arr[i] === 9) {
+		if (i === 0 && arr[i] === 9 && carry == 1) {
 			result.unshift(1);
 		}
 	}

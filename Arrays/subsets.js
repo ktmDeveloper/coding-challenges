@@ -24,7 +24,7 @@ function subsets(arr) {
 
 /* Use recursion to print all the subsets */
 
-function subsetsRecur(arr) {
+function subsets(arr) {
     let sets = [];
     let res = []
     recur(arr, sets, 0, res);
@@ -32,16 +32,14 @@ function subsetsRecur(arr) {
 }
 
 function recur(arr, sets, idx, res) {
-    if (arr.length == idx) {
 
-        res.push(sets)
-    } else {
-        sets[idx] = null
-        recur(arr, sets, idx + 1, res)
-        sets[idx] = arr[idx]
-        recur(arr, sets, idx + 1, res)
+    res.push(sets.slice()); //use .slice() to push a copy, not a reference.
+    for (let i = idx; i < arr.length; i++) {
+        sets.push(arr[i]);
+        recur(arr, sets, i + 1, res);
+        sets.pop();
     }
-
 }
+
 
 console.log(susubsetsRecurbsets([1, 2, ]))

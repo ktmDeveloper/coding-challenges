@@ -1,7 +1,7 @@
 /*
 Longest Common Subsequence(Dynamic Programming)
 */
-/* recursive 
+/* recursive */
 function LCS(strA, strB){
 	return LCSCounter(strA, strB, strA.length, strB.length)
 }
@@ -19,7 +19,7 @@ function LCSCounter(strA, strB, n, m){
 
 console.log(LCS('ABCDEFZXLOP', 'ABCDEFQWER')) //5.000000001018634 ms
 
-*/
+
 
 /* memonization */
 

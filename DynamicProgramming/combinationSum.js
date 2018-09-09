@@ -32,3 +32,28 @@ function combSum(candidates, target){
   
   
   console.log(combSum([2,3,6,7], 7))
+
+
+var combinationSum = function(candidates, target) {
+  candidates = candidates.sort((a, b) => a - b)
+  let res = []
+  recur(candidates, target, 0, new Array(), res)
+  return res;
+};
+
+
+function recur(candidates, target, idx, list, res) {
+  if (target == 0) {
+      res.push(list.slice())
+      return
+  }
+
+  for (let i = idx; i < candidates.length; i++) {
+      if (candidates[i] > target) {
+          break;
+      }
+      list.push(candidates[i])
+      recur(candidates, target - candidates[i], i, list, res)
+      list.pop()
+  }
+}
