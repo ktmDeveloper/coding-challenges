@@ -61,6 +61,23 @@ class linkedList {
         }
         return false
     }
+    
+  reverse(){
+    if(!this.root) return null
+    let prev = null
+    let next = null
+    let curr = this.root
+    while(curr){
+      let next = curr.next
+      curr.next = prev
+      prev = curr
+      curr = next
+    }
+    
+    this.root = prev
+    return this.root
+    
+  }
 }
 
 let ll = new linkedList()
