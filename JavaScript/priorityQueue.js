@@ -35,11 +35,12 @@ class Node{
   
   let q = new priorityQueue()
   
-  q.insert(2,2)
-  q.insert(3,3)
-  q.insert(1,1)
-  q.insert(5,5)
-  q.insert(4,4)
+  q.insert(2)
+  q.insert(3)
+  q.insert(1)
+  q.insert(5)
+  q.insert(4)
+ 
   
   console.log(q)
   
