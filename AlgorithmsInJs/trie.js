@@ -57,7 +57,7 @@ class WordDictionary {
                 for (let letter of current.children.keys()) {
                     print(current.children.get(letter), str.concat(letter));
                 };
-                if (current.isEnd()) {
+                if (current.isEnd) {
                     words.push(str);
                 };
             } else { //if no children and str exist then that is end of trie and push it to list of words
