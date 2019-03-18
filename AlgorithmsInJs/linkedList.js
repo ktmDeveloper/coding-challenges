@@ -10,6 +10,7 @@ class linkedList {
         this.root = null
         this.length = 0
     }
+
     add(val) {
         if (this.root) {
             let curr = this.root
