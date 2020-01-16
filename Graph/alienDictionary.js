@@ -1,4 +1,7 @@
-// There is a new alien language which uses the latin alphabet. However, the order among letters are unknown to you. You receive a list of words from the dictionary, where words are sorted lexicographically by the rules of this new language. Derive the order of letters in this language.
+// There is a new alien language which uses the latin alphabet. 
+// However, the order among letters are unknown to you. 
+// You receive a list of words from the dictionary, where words are sorted lexicographically 
+// by the rules of this new language. Derive the order of letters in this language.
 
 // For example,
 // Given the following words in dictionary,
@@ -49,7 +52,7 @@ class Graph{
 
 
     topologicalSort(){
-      
+        // using dfs
         const vertices = this.vertices;
         const adjList = this.adjList;
         const visited = []
@@ -78,7 +81,43 @@ class Graph{
         }
      return topo.reverse()
     }
+    
+     topoSort() {
+         // https://www.youtube.com/watch?v=71eHuQvSwc0
+         // counting zero indexes
+         // zero index of a node is when there is no other node pointing towards it
+        let mapOfIndexes = {}; // map for counting nodes indexes (excludes zero indexes)
+        let zeroIndexes = []; // all the zeroIdexes is listed here
+        let topologicalSort = [];
+        for (let val of Object.values(this.adjList)) {
+            val.forEach(el => {
+                mapOfIndexes[el] = mapOfIndexes[el] + 1 || 1
+            })
+        }
 
+        for (let char of Object.keys(this.adjList)) {
+            if (!mapOfIndexes[char]) {
+                zeroIndexes.push(char)
+            }
+        }
+
+        while (zeroIndexes.length) {
+            let curr = zeroIndexes.pop();
+            topologicalSort.push(curr);
+           if(!this.adjList[curr]){
+             continue;
+           }
+            let edges = this.edges[curr]
+            edges.forEach(edge => {
+                mapOfIndexes[edge]--
+                if (mapOfIndexes[edge] == 0) {
+                    zeroIndexes.push(edge)
+                    delete mapOfIndexes[edge];
+                }
+            })
+        }
+        return topologicalSort;
+    }
 
 }
 
