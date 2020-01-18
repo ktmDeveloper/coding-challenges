@@ -38,21 +38,19 @@ var flatten = function(arr, resultArr) {
 };
 
 console.log(flatten([1, [2, [ [3, 4], 5], 6]]))
-    
+
 */
 
-//Easier Version
-let ary = [1, [2, [
-    [3, 4], 5
-], 6]]
+// Easier Version
+const ary = [1, [2, [
+  [3, 4], 5,
+], 6]];
 
-console.log(ary.join())
+console.log(ary.join());
 
-let ary1 = ary.join().split(',')
+const ary1 = ary.join().split(',');
 
-ary2 = ary1.map(function(el) {
-    return parseInt(el)
-})
+ary2 = ary1.map((el) => parseInt(el));
 console.log(ary1);
-console.log()
+console.log();
 console.log(ary2);

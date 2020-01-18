@@ -21,25 +21,25 @@ console.log(arr)
 */
 
 function add_one(arr) {
-	let carry = 1;
-	let result = new Array(arr.length);
-	for (let i = arr.length - 1; i > -1; i--) {
-		let total = arr[i] + carry;
-		if (total == 10) {
-			carry = 1;
-		} else {
-			carry = 0;
-		}
-		result[i] = total % 10;
-		if (i === 0 && arr[i] === 9 && carry == 1) {
-			result.unshift(1);
-		}
-	}
-	console.log(result);
+  let carry = 1;
+  const result = new Array(arr.length);
+  for (let i = arr.length - 1; i > -1; i--) {
+    const total = arr[i] + carry;
+    if (total == 10) {
+      carry = 1;
+    } else {
+      carry = 0;
+    }
+    result[i] = total % 10;
+    if (i === 0 && arr[i] === 9 && carry == 1) {
+      result.unshift(1);
+    }
+  }
+  console.log(result);
 }
 
-var arr = [9, 9, 9, 9, 9];
-var arr1 = [1, 2, 3, 4, 5];
+const arr = [9, 9, 9, 9, 9];
+const arr1 = [1, 2, 3, 4, 5];
 
 console.log(arr);
 add_one(arr);

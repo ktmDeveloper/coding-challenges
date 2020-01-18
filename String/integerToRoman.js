@@ -8,7 +8,7 @@ var intToRoman = function(num) {
     let C = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"];
     let X = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"];
     let I = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
-    
+
     let res = ""
     if(M[Math.floor(num/1000)]){
       res += M[Math.floor(num/1000)]
@@ -25,4 +25,3 @@ var intToRoman = function(num) {
     return res
 };
 */
-

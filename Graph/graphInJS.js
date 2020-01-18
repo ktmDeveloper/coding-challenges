@@ -53,7 +53,7 @@
 //                     queue.push(nodes)
 //                 }
 //             }
-            
+
 //             visited.push(firstItem)
 //         }
 //     }
@@ -98,154 +98,146 @@
 
 // graph.dfs()
 
-class Graph{
-    constructor(isDirected = false){
-        this.isDirected = isDirected;
-        this.vertices = []
-        this.adjList = new Map()
+class Graph {
+  constructor(isDirected = false) {
+    this.isDirected = isDirected;
+    this.vertices = [];
+    this.adjList = new Map();
+  }
+
+  addVertex(v) {
+    if (this.vertices.includes(v)) {
+      console.log(`${v} already exists`);
+    } else {
+      this.vertices.push(v);
+      this.adjList.set(v, []);
     }
- 
-    addVertex(v){
-        if(this.vertices.includes(v)){
-            console.log(`${v} already exists`)
-        } else {
-            this.vertices.push(v)
-            this.adjList.set(v, [])
-        }
+  }
+
+  addEdge(u, v) {
+    if (!this.vertices.includes(u)) {
+      this.addVertex(u);
     }
-
-    addEdge(u, v){
-        if(!this.vertices.includes(u)){
-            this.addVertex(u)
-        }
-        if(!this.vertices.includes(v)){
-            this.addVertex(v)
-        }
-        this.adjList.get(u).push(v)
-        if(!this.isDirected){
-            this.adjList.get(v).push(u)
-        }
+    if (!this.vertices.includes(v)) {
+      this.addVertex(v);
     }
-
-    toString(){
-        let vertices = this.vertices
-        let string = '\n'
-        for(let vertex of vertices){
-            string += `${vertex} -> `
-            let children = this.adjList.get(vertex)
-            for(let child of children){
-                string += 'child'
-            }
-            string += '\n'
-        }
-        return string
+    this.adjList.get(u).push(v);
+    if (!this.isDirected) {
+      this.adjList.get(v).push(u);
     }
+  }
 
-    bfs(startVertex){
-        let adjList = this.adjList
-        let queue = []
-        let visited = []
-
-        queue.push(startVertex)
-
-        while(queue.length){
-            let firstItem = queue.shift()
-            if(!visited.includes(firstItem)){
-                console.log(firstItem)
-                let connectedNodes = adjList.get(firstItem)
-                for (var nodes of connectedNodes) {
-                    queue.push(nodes)
-                }
-            }
-            
-            visited.push(firstItem)
-        }
+  toString() {
+    const { vertices } = this;
+    let string = '\n';
+    for (const vertex of vertices) {
+      string += `${vertex} -> `;
+      const children = this.adjList.get(vertex);
+      for (const child of children) {
+        string += 'child';
+      }
+      string += '\n';
     }
+    return string;
+  }
 
-    dfs(startVertex){
-        let adjList = this.adjList
-        let stack = []
-        let visited = []
+  bfs(startVertex) {
+    const { adjList } = this;
+    const queue = [];
+    const visited = [];
 
-        stack.push(startVertex)
+    queue.push(startVertex);
 
-        while(stack.length){
-            let firstItem = stack.pop()
-            if(!visited.includes(firstItem)){
-                console.log(firstItem)
-                let connectedNodes = adjList.get(firstItem)
-                for (var nodes of connectedNodes) {
-                    stack.push(nodes)
-                }
-            }
-            
-            visited.push(firstItem)
+    while (queue.length) {
+      const firstItem = queue.shift();
+      if (!visited.includes(firstItem)) {
+        console.log(firstItem);
+        const connectedNodes = adjList.get(firstItem);
+        for (const nodes of connectedNodes) {
+          queue.push(nodes);
         }
+      }
+
+      visited.push(firstItem);
     }
+  }
 
+  dfs(startVertex) {
+    const { adjList } = this;
+    const stack = [];
+    const visited = [];
 
-    depthFirstSearchRecur() {
-        const vertices = this.vertices;
-        const adjList = this.adjList;
-        const visited = []
+    stack.push(startVertex);
 
-        //recursion function
-        let dfsRecur = (u) => {
-            console.log(u)
-
-            visited.push(u)
-            const neighbors = adjList.get(u);
-            for (let i = 0; i < neighbors.length; i++) {
-                const w = neighbors[i];
-                if (!visited.includes(w)) {
-                    dfsRecur(w);
-                }
-            }
-
-        };
-
-        for (let i = 0; i < vertices.length; i++) {
-            if (!visited.includes(vertices[i])) {
-                dfsRecur(vertices[i]); //initial call
-            }
+    while (stack.length) {
+      const firstItem = stack.pop();
+      if (!visited.includes(firstItem)) {
+        console.log(firstItem);
+        const connectedNodes = adjList.get(firstItem);
+        for (const nodes of connectedNodes) {
+          stack.push(nodes);
         }
+      }
+
+      visited.push(firstItem);
     }
-
-    topologicalSort(){
-      
-        const vertices = this.vertices;
-        const adjList = this.adjList;
-        const visited = []
-        let topo = []
-
-        //recursion function
-        let dfsRecur = (u) => {
+  }
 
 
-            visited.push(u)
-            topo.push(u)
-            
-            const neighbors = adjList.get(u);
-            for (let i = 0; i < neighbors.length; i++) {
-                const w = neighbors[i];
-                if (!visited.includes(w)) {
-                    dfsRecur(w);
-                }
-            }
+  depthFirstSearchRecur() {
+    const { vertices } = this;
+    const { adjList } = this;
+    const visited = [];
 
-        };
+    // recursion function
+    const dfsRecur = (u) => {
+      console.log(u);
 
-        for (let i = 0; i < vertices.length; i++) {
-            if (!visited.includes(vertices[i])) {
-                dfsRecur(vertices[i]); //initial call
-            }
+      visited.push(u);
+      const neighbors = adjList.get(u);
+      for (let i = 0; i < neighbors.length; i++) {
+        const w = neighbors[i];
+        if (!visited.includes(w)) {
+          dfsRecur(w);
         }
-      
-      while(topo.length){
-        console.log(topo.pop())
+      }
+    };
+
+    for (let i = 0; i < vertices.length; i++) {
+      if (!visited.includes(vertices[i])) {
+        dfsRecur(vertices[i]); // initial call
+      }
+    }
+  }
+
+  topologicalSort() {
+    const { vertices } = this;
+    const { adjList } = this;
+    const visited = [];
+    const topo = [];
+
+    // recursion function
+    const dfsRecur = (u) => {
+      visited.push(u);
+      topo.push(u);
+
+      const neighbors = adjList.get(u);
+      for (let i = 0; i < neighbors.length; i++) {
+        const w = neighbors[i];
+        if (!visited.includes(w)) {
+          dfsRecur(w);
+        }
+      }
+    };
+
+    for (let i = 0; i < vertices.length; i++) {
+      if (!visited.includes(vertices[i])) {
+        dfsRecur(vertices[i]); // initial call
       }
     }
 
-
+    while (topo.length) {
+      console.log(topo.pop());
+    }
+  }
 }
-

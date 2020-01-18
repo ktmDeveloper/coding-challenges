@@ -33,35 +33,33 @@ let nums = [-1, 0, 1, 2, -1, -4];
 console.log(3Sum(nums))
 */
 function threeSum(arr) {
-	let results = [];
-	arr.sort(function(a, b) {
-		return a - b;
-	});
-	for (let i = 0; i < arr.length - 3; i++) {
-		if (i == 0 || arr[i] > arr[i - 1]) {
-			//to avoid duplicates
-			let start = i + 1;
-			let end = arr.length - 1;
-			while (start < end) {
-				//to go for all possibilites
-				if (arr[i] + arr[start] + arr[end] == 0) {
-					results.push([arr[i], arr[start], arr[end]]);
-				}
-				if (arr[i] + arr[start] + arr[end] < 0) {
-					let currentStart = start; //we dont want to repeat the number
-					while (arr[start] == arr[currentStart] && start < end) {
-						start++;
-					}
-				} else {
-					let currentEnd = end;
-					while (arr[end] == arr[currentEnd] && start < end) {
-						end--;
-					}
-				}
-			}
-		}
-	}
-	return results;
+  const results = [];
+  arr.sort((a, b) => a - b);
+  for (let i = 0; i < arr.length - 3; i++) {
+    if (i == 0 || arr[i] > arr[i - 1]) {
+      // to avoid duplicates
+      let start = i + 1;
+      let end = arr.length - 1;
+      while (start < end) {
+        // to go for all possibilites
+        if (arr[i] + arr[start] + arr[end] == 0) {
+          results.push([arr[i], arr[start], arr[end]]);
+        }
+        if (arr[i] + arr[start] + arr[end] < 0) {
+          const currentStart = start; // we dont want to repeat the number
+          while (arr[start] == arr[currentStart] && start < end) {
+            start++;
+          }
+        } else {
+          const currentEnd = end;
+          while (arr[end] == arr[currentEnd] && start < end) {
+            end--;
+          }
+        }
+      }
+    }
+  }
+  return results;
 }
-let nums = [1, 2, -2, -1, 0];
+const nums = [1, 2, -2, -1, 0];
 console.log(threeSum(nums));

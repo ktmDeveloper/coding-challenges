@@ -1,4 +1,4 @@
-//keeping state and updating UI with plain vanilla JS
+// keeping state and updating UI with plain vanilla JS
 
 /* HTML
 <div class="all">
@@ -68,65 +68,63 @@ ul li span:active {
 
 */
 
-class adList {
-    constructor(root) {
-      this.root = root;
-      this.items = new Map([]);
-  
-      //UI Items
-      this.btn = root.querySelector('.container button')
-      this.ul = root.querySelector('ul')
-  
-      //Event Listener
-      this.btn.addEventListener('click', (e) => {
-        this.addAddress()
-        this.updateHelper()
-      })
-  
-      root.querySelector('ul').addEventListener('click', (e) => {
-        if (e.target.matches('span')) { //one event listerner to all the list items
-          let id = e.target.getAttribute('data-id')
-          this.deleteAddress(id, e.target) //send ID and the target clicked
-        }
-      })
-    }
-  
-    updateHelper() {
-      if (this.items.size == 0) {
-        this.root.querySelector('.helper').classList.remove('hidden')
-        this.root.querySelector('.head').classList.add('hidden')
-      } else {
-        this.root.querySelector('.helper').classList.add('hidden')
-        this.root.querySelector('.head').classList.remove('hidden')
-  
+class AdList {
+  constructor(root) {
+    this.root = root;
+    this.items = new Map([]);
+
+    // UI Items
+    this.btn = root.querySelector('.container button');
+    this.ul = root.querySelector('ul');
+
+    // Event Listener
+    this.btn.addEventListener('click', (e) => {
+      this.addAddress();
+      this.updateHelper();
+    });
+
+    root.querySelector('ul').addEventListener('click', (e) => {
+      if (e.target.matches('span')) { // one event listerner to all the list items
+        const id = e.target.getAttribute('data-id');
+        this.deleteAddress(id, e.target); // send ID and the target clicked
       }
-    }
-  
-    addAddress() {
-      let txtVal = this.root.querySelector('.container input').value
-      this.root.querySelector('.container input').value = ''
-      if (txtVal.length > 0) {
-        let id = Date.now().toString()
-  
-        let html = `<li>${txtVal}<span data-id="${id}">delete</span></li>`
-        this.ul.innerHTML += html
-        this.items.set(id, txtVal)
-        console.log(this.items)
-      }
-    }
-  
-    deleteAddress(id, node) {
-      if (this.items.has(id)) {
-        this.items.delete(id)
-      }
-  
-      console.log(this.items)
-      console.log(this.items.size)
-      node.parentNode.remove()
-      this.updateHelper()
+    });
+  }
+
+  updateHelper() {
+    if (this.items.size == 0) {
+      this.root.querySelector('.helper').classList.remove('hidden');
+      this.root.querySelector('.head').classList.add('hidden');
+    } else {
+      this.root.querySelector('.helper').classList.add('hidden');
+      this.root.querySelector('.head').classList.remove('hidden');
     }
   }
-  
-  let root = document.querySelector('.all')
-  let add = new adList(root)
-  
+
+  addAddress() {
+    const txtVal = this.root.querySelector('.container input').value;
+    this.root.querySelector('.container input').value = '';
+    if (txtVal.length > 0) {
+      const id = Date.now().toString();
+
+      const html = `<li>${txtVal}<span data-id="${id}">delete</span></li>`;
+      this.ul.innerHTML += html;
+      this.items.set(id, txtVal);
+      console.log(this.items);
+    }
+  }
+
+  deleteAddress(id, node) {
+    if (this.items.has(id)) {
+      this.items.delete(id);
+    }
+
+    console.log(this.items);
+    console.log(this.items.size);
+    node.parentNode.remove();
+    this.updateHelper();
+  }
+}
+
+const root = document.querySelector('.all');
+const add = new AdList(root);

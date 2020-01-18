@@ -1,6 +1,6 @@
 // N Queens using backtracking
 // https://youtu.be/jJPtLzq1E-Y
-/*  
+/*
   Q Q Q Q
  ___ ___ ___ ___
 |___|___|___|___|
@@ -17,48 +17,48 @@
 |___|_Q_|___|___|
 */
 function nQueens(n) {
-    let queens = [];
+  const queens = [];
 
-    function placeQueen(col) {
-        if (col >= n) {
-            return true;
-        }
-
-        let row = 0;
-
-        while (row < n) {
-            queens.push([row, col])
-            if (isSafe(row, col) && placeQueen(col + 1)) {
-                return true
-            }
-
-            queens.pop();
-            row++
-        }
-        return false
+  function placeQueen(col) {
+    if (col >= n) {
+      return true;
     }
 
-    function isSafe(row, col) {
-        for (let i = 0; i < queens.length - 1; i++) { // dont check the last item as it is the one we are checking, so queens.length - 1
-            let ro = queens[i][0];
-            let co = queens[i][1];
+    let row = 0;
 
-            if (row === ro) {
-                return false
-            }
+    while (row < n) {
+      queens.push([row, col]);
+      if (isSafe(row, col) && placeQueen(col + 1)) {
+        return true;
+      }
 
-            if (Math.abs(row - ro) === Math.abs(col - co)) {
-                return false
-            }
-        }
-        return true
+      queens.pop();
+      row++;
     }
+    return false;
+  }
 
-    if (placeQueen(0)) {
-        return queens
+  function isSafe(row, col) {
+    for (let i = 0; i < queens.length - 1; i++) { // dont check the last item as it is the one we are checking, so queens.length - 1
+      const ro = queens[i][0];
+      const co = queens[i][1];
+
+      if (row === ro) {
+        return false;
+      }
+
+      if (Math.abs(row - ro) === Math.abs(col - co)) {
+        return false;
+      }
     }
+    return true;
+  }
 
-    return null
+  if (placeQueen(0)) {
+    return queens;
+  }
+
+  return null;
 }
 
-console.log(nQueens(4))
+console.log(nQueens(4));
