@@ -35,14 +35,14 @@ function add_one(arr) {
       result.unshift(1);
     }
   }
-  console.log(result);
+  return result;
 }
 
 const arr = [9, 9, 9, 9, 9];
 const arr1 = [1, 2, 3, 4, 5];
 
 console.log(arr);
-add_one(arr);
-
+console.log(add_one(arr));
+console.log('************');
 console.log(arr1);
-add_one(arr1);
+console.log(add_one(arr1));

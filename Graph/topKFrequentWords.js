@@ -42,3 +42,13 @@ var topKFrequentLocale = function (words, k) {
     return a.localeCompare(b);
   }).slice(0, k);
 };
+
+var removeDuplicates = function (nums) {
+  var i = 0;
+  nums.forEach((elem) => {
+    if (elem !== nums[i]) {
+      nums[++i] = elem;
+    }
+  });
+  return nums.length && i + 1;
+};
