@@ -49,3 +49,52 @@ function isSimilar(a, b) {
   }
   return true;
 }
+
+
+/** WITHOUT MAP , IS FASTER */
+
+
+/**
+ * @param {string[]} A
+ * @return {number}
+ */
+const numSimilarGroupsNoMap = function (arr) {
+  if (arr == null) return 0;
+  if (arr.length <= 1) return arr.length;
+
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] == null) continue;
+
+    const word = arr[i];
+    arr[i] = null;
+    DFS(arr, word);
+    count++;
+  }
+  return count;
+};
+
+
+let DFS = function (arr, word) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] == null) continue;
+    if (ISSIMILAR(arr[i], word)) {
+      const simWord = arr[i];
+      arr[i] = null;
+      DFS(arr, simWord);
+    }
+  }
+};
+
+
+function ISSIMILAR(a, b) {
+  if (a === b) return true;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== b[i]) {
+      diff++;
+      if (diff > 2) return false;
+    }
+  }
+  return true;
+}
