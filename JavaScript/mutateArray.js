@@ -1,6 +1,8 @@
 /*
 
-Given an input array and another array that describes a new index for each element, mutate the input array so that each element ends up in their new index. Discuss the runtime of the algorithm and how you can be sure there won't be any infinite loops.
+Given an input array and another array that describes a new index for each element,
+mutate the input array so that each element ends up in their new index.
+Discuss the runtime of the algorithm and how you can be sure there won't be any infinite loops.
 
 */
 function mutate(input, mutate) {
