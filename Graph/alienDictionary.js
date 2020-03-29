@@ -20,6 +20,84 @@
 // If the order is invalid, return an empty string.
 // There may be multiple valid order of letters, return any one of them is fine.
 
+/* consie solution */
+function alienDictionary(words) {
+  if (!words || words.length === 0) {
+    return [];
+  }
+  const graph = buildGraph(words);
+  console.log(topoSort(graph));
+}
+
+function buildGraph(words) {
+  const graph = {};
+
+  for (let i = 0; i < words.length - 1; i++) {
+    const curr = words[i];
+    const next = words[i + 1];
+    const minLen = Math.min(curr.length, next.length);
+    for (let j = 0; j < minLen; j++) {
+      const from = curr[j];
+      const to = next[j];
+      if (from === to) {
+        continue;
+      } else {
+        if (graph[from]) {
+          graph[from].push(to);
+        } else {
+          graph[from] = [to];
+        }
+        break;
+      }
+    }
+  }
+  return graph;
+}
+
+function topoSort(graph) {
+  const mapOfIndexes = {}; // map for counting nodes indexes (excludes zero indexes)
+  const zeroIndexes = []; // all the zeroIdexes is listed here
+  const topologicalSort = [];
+  for (const val of Object.values(graph)) {
+    val.forEach((el) => {
+      mapOfIndexes[el] = mapOfIndexes[el] + 1 || 1;
+    });
+  }
+
+  for (const char of Object.keys(graph)) {
+    if (!mapOfIndexes[char]) {
+      zeroIndexes.push(char);
+    }
+  }
+
+  while (zeroIndexes.length) {
+    const curr = zeroIndexes.pop();
+    topologicalSort.push(curr);
+    if (!graph[curr]) {
+      continue;
+    }
+    const edges = graph[curr];
+    edges.forEach((edge) => {
+      mapOfIndexes[edge]--;
+      if (mapOfIndexes[edge] == 0) {
+        zeroIndexes.push(edge);
+        delete mapOfIndexes[edge];
+      }
+    });
+  }
+  return topologicalSort;
+}
+
+const words = [
+  'wrt',
+  'wrf',
+  'er',
+  'ett',
+  'rftt',
+];
+
+console.log(alienDictionary(words));
+/* end consise solution */
 
 class Graph {
   constructor(isDirected = false) {
@@ -118,7 +196,7 @@ class Graph {
   }
 }
 
-function alienDictionary(words) {
+function alienDictionaryTwo(words) {
   const graph = new Graph(); // a new directed graph
 
   for (let i = 0; i < words.length - 1; i++) {
@@ -139,7 +217,7 @@ function alienDictionary(words) {
 }
 
 
-const words = [
+const letters = [
   'wrt',
   'wrf',
   'er',
@@ -147,4 +225,4 @@ const words = [
   'rftt',
 ];
 
-console.log(alienDictionary(words));
+console.log(alienDictionary(letters));
