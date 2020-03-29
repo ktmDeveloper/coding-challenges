@@ -48,3 +48,22 @@ function lengthOfLIS(nums) {
 
   return max;
 }
+
+/* Easy to understand */
+function lengthOfLIS2(nums) {
+  if (!nums || nums.length === 0) {
+    return 0;
+  }
+  const dp = new Array(nums.length);
+  dp.fill(1);
+  let longest = 1;
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = 0; j < i; j++) {
+      if (nums[i] > nums[j]) {
+        dp[i] = Math.max(dp[i], dp[j] + 1);
+        longest = Math.max(dp[i], longest);
+      }
+    }
+  }
+  return longest;
+}
