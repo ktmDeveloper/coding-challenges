@@ -1,4 +1,4 @@
-// https://leetcode.com/problems/add-and-search-word-data-structure-design/description/
+// http://leetcode.com/problems/add-and-search-word-data-structure-design/description/
 // and print all the words in trie
 class Node {
   constructor() {
