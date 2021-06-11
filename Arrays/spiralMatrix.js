@@ -1,5 +1,9 @@
-// give an idex n, write a function that prints out integer digit in spiral form
-// spiral(3) => [[1,2,3],[8,9,4],[7,6,5]]
+/* give an idex n, write a function that prints out integer digit in spiral form
+  spiral(3) => [
+  [1,2,3],
+  [8,9,4],
+  [7,6,5]]
+*/
 
 function buildSpiral(n) {
   const res = new Array(n);

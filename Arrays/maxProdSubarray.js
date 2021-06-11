@@ -1,5 +1,6 @@
 /*
-Given an integer array nums, find the contiguous subarray within an array (containing at least one number) which has the largest product.
+Given an integer array nums, find the contiguous subarray within an array 
+(containing at least one number) which has the largest product.
 
 Example 1:
 
@@ -21,12 +22,12 @@ function maxProduct(A) {
   let maxherepre = A[0];
   let minherepre = A[0];
   let maxsofar = A[0];
-  let maxhere; let
-    minhere;
+  let maxhere;
+  let minhere;
 
   for (let i = 1; i < A.length; i++) {
-    maxhere = Math.max(Math.max(maxherepre * A[i], minherepre * A[i]), A[i]);
-    minhere = Math.min(Math.min(maxherepre * A[i], minherepre * A[i]), A[i]);
+    maxhere = Math.max(maxherepre * A[i], minherepre * A[i], A[i]);
+    minhere = Math.min(maxherepre * A[i], minherepre * A[i], A[i]);
     maxsofar = Math.max(maxhere, maxsofar);
     maxherepre = maxhere;
     minherepre = minhere;
@@ -35,3 +36,5 @@ function maxProduct(A) {
 }
 
 console.log(maxProduct([2, 3, -5, 3, 5, 1, 0, 10, 20, 0]));
+console.log(maxProduct([2,3,-2,4]));
+console.log(maxProduct([-2,0,-1]));

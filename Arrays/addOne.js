@@ -20,22 +20,51 @@ console.log(arr)
 
 */
 
+// function add_one(arr) {
+//   let carry = 1;
+//   const result = new Array(arr.length);
+//   for (let i = arr.length - 1; i > -1; i--) {
+//     const total = arr[i] + carry;
+//     if (total == 10) {
+//       carry = 1;
+//     } else {
+//       carry = 0;
+//     }
+//     result[i] = total % 10;
+//     if (i === 0 && arr[i] === 9 && carry == 1) {
+//       result.unshift(1);
+//     }
+//   }
+//   return result;
+// }
+
+// const arr = [9, 9, 9, 9, 9];
+// const arr1 = [1, 2, 3, 4, 5];
+
+// console.log(arr);
+// console.log(add_one(arr));
+// console.log('************');
+// console.log(arr1);
+// console.log(add_one(arr1));
+
+
 function add_one(arr) {
   let carry = 1;
+
   const result = new Array(arr.length);
-  for (let i = arr.length - 1; i > -1; i--) {
+  for(let i = arr.length - 1; i > -1; i--) {
     const total = arr[i] + carry;
-    if (total == 10) {
+    if(total == 10) {
       carry = 1;
     } else {
       carry = 0;
     }
     result[i] = total % 10;
-    if (i === 0 && arr[i] === 9 && carry == 1) {
+    if(i === 0 && arr[i] === 9 && carry == 1) {
       result.unshift(1);
     }
   }
-  return result;
+  return result
 }
 
 const arr = [9, 9, 9, 9, 9];
@@ -46,3 +75,4 @@ console.log(add_one(arr));
 console.log('************');
 console.log(arr1);
 console.log(add_one(arr1));
+console.log(101%10)
