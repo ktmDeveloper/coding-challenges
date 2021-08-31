@@ -25,7 +25,33 @@ class WordDictionary {
     current.isEnd = true;
   }
 
-  search(word) {
+//   search(word) {
+//     function searchWord(curr, idx) {
+//       if (!curr || (word.length == idx && !curr.isEnd)) {
+//         return false;
+//       }
+//       if (word.length == idx && curr.isEnd) {
+//         return true;
+//       }
+//       if (word[idx] == '.') { // if '.' then search for each character and see if exists in the children, if it does the do recursion
+//         const begin = 'a'.charCodeAt();
+//         for (let i = 0; i < 26; i++) {
+//           const char = String.fromCharCode(begin + i);
+//           if (curr.children.has(char)) {
+//             if (searchWord(curr.children.get(char), idx + 1)) {
+//               return true;
+//             }
+//           }
+//         }
+//         return false;
+//       }
+//       return searchWord(curr.children.get(word[idx]), idx + 1);
+//     }
+//     return searchWord(this.root, 0);
+//   }
+  
+    // search without looking for all the characters in alphabet
+   search(word) {
     function searchWord(curr, idx) {
       if (!curr || (word.length == idx && !curr.isEnd)) {
         return false;
@@ -34,14 +60,11 @@ class WordDictionary {
         return true;
       }
       if (word[idx] == '.') { // if '.' then search for each character and see if exists in the children, if it does the do recursion
-        const begin = 'a'.charCodeAt();
-        for (let i = 0; i < 26; i++) {
-          const char = String.fromCharCode(begin + i);
-          if (curr.children.has(char)) {
-            if (searchWord(curr.children.get(char), idx + 1)) {
+        const keys = [...curr.children.keys()];
+        for (let i = 0; i < keys.length; i++) {
+            if (searchWord(curr.children.get(keys[i]), idx + 1)) {
               return true;
             }
-          }
         }
         return false;
       }
